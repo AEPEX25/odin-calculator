@@ -93,13 +93,17 @@ body {
 }
 
 .display {
-  text-align: center;
-  align-items: center;
+  text-align: right;
   justify-content: flex-end;
+  flex-direction: column;
   height: 100px;
   padding: 10px;
   background-color: rgb(206, 206, 206);
   font-size: 28px;
+}
+
+.previous-value {
+  font-size: 18px;
 }
 
 .buttons {
