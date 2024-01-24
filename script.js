@@ -25,10 +25,23 @@ document.addEventListener("DOMContentLoaded", function () {
     operant.addEventListener("click", function (e) {
       handleOperant(e.target.textContent);
       displayCurrentValue.textContent = operator;
-      displayPreviousValue.textContent = currentValue + operator;
+      displayPreviousValue.textContent = `${previousValue} ${operator}`;
       currentValue = "";
     })
   );
+
+  equal.addEventListener("click", function () {
+    handleCalculation();
+    displayCurrentValue.textContent = currentValue;
+  });
+
+  clear.addEventListener("click", function () {
+    operator = "";
+    previousValue = "";
+    currentValue = "";
+    displayPreviousValue.textContent = "";
+    displayCurrentValue.textContent = "";
+  });
 });
 
 const handleNumber = function (num) {
@@ -36,5 +49,21 @@ const handleNumber = function (num) {
 };
 
 const handleOperant = function (op) {
+  previousValue = currentValue;
   operator = op;
+  currentValue = "";
+};
+
+const handleCalculation = function () {
+  previousValue = Number(previousValue);
+  currentValue = Number(currentValue);
+  if (operator === "+") {
+    currentValue += previousValue;
+  } else if (operator === "-") {
+    currentValue -= previousValue;
+  } else if (operator === "*") {
+    currentValue *= previousValue;
+  } else if (operator === "/") {
+    currentValue /= previousValue;
+  }
 };
