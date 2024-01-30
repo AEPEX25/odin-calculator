@@ -3,6 +3,7 @@
 let operator = "";
 let previousValue = "";
 let currentValue = "";
+let result = "";
 
 document.addEventListener("DOMContentLoaded", function () {
   const clear = document.querySelector(".all-clear");
@@ -26,21 +27,37 @@ document.addEventListener("DOMContentLoaded", function () {
       handleOperant(e.target.textContent);
       displayCurrentValue.textContent = operator;
       displayPreviousValue.textContent = `${previousValue} ${operator}`;
-      currentValue = "";
+      /*
+      if (previousValue != "" && currentValue != "") {
+        handleCalculation();
+        displayCurrentValue.textContent = "0";
+        currentValue = "";
+        previousValue = result;
+        result = "";
+        displayPreviousValue.textContent = previousValue;
+        console.log(previousValue, currentValue, result);
+      }
+      */
     })
   );
 
   equal.addEventListener("click", function () {
     handleCalculation();
-    displayCurrentValue.textContent = currentValue;
+    displayCurrentValue.textContent = "0";
+    currentValue = "";
+    previousValue = result;
+    displayPreviousValue.textContent = previousValue;
+    displayCurrentValue.textContent = previousValue;
   });
 
   clear.addEventListener("click", function () {
     operator = "";
     previousValue = "";
     currentValue = "";
+    result = "";
     displayPreviousValue.textContent = "";
     displayCurrentValue.textContent = "";
+    console.log(operator, previousValue, currentValue, result);
   });
 });
 
@@ -49,8 +66,10 @@ const handleNumber = function (num) {
 };
 
 const handleOperant = function (op) {
-  previousValue = currentValue;
   operator = op;
+  if (previousValue == "") {
+    previousValue = currentValue;
+  }
   currentValue = "";
 };
 
@@ -58,12 +77,12 @@ const handleCalculation = function () {
   previousValue = Number(previousValue);
   currentValue = Number(currentValue);
   if (operator === "+") {
-    currentValue += previousValue;
+    result = previousValue + currentValue;
   } else if (operator === "-") {
-    currentValue -= previousValue;
+    result = previousValue - currentValue;
   } else if (operator === "*") {
-    currentValue *= previousValue;
+    result = previousValue * currentValue;
   } else if (operator === "/") {
-    currentValue /= previousValue;
+    result = previousValue / currentValue;
   }
 };
