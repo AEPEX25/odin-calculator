@@ -26,6 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
       displayCurrentValue.textContent = operator;
       if (currentValue == "") return;
       if (previousValue !== "") {
+        if (currentValue == 0 || (previousValue == 0 && operator == "/")) {
+          displayCurrentValue.textContent = "ERROR";
+          return;
+        }
         handleCalculation();
       }
       operator = e.target.textContent;
@@ -37,6 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   equal.addEventListener("click", function () {
+    if (previousValue == "" || currentValue == "") {
+      displayCurrentValue.textContent = "ERROR";
+      return;
+    }
+    if (currentValue == 0 || (previousValue == 0 && operator == "/")) {
+      displayCurrentValue.textContent = "ERROR";
+      return;
+    }
     handleCalculation();
     previousValue = "";
     displayPreviousValue.textContent = "";
@@ -68,5 +80,12 @@ const handleCalculation = function () {
     currentValue = previousValue * currentValue;
   } else if (operator === "/") {
     currentValue = previousValue / currentValue;
+  }
+};
+
+const divideByZero = function () {
+  if (currentValue == 0 || previousValue == 0) {
+    displayCurrentValue.textContent = "ERROR";
+    return;
   }
 };
