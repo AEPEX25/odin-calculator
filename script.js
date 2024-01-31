@@ -81,11 +81,10 @@ const handleCalculation = function () {
   } else if (operator === "/") {
     currentValue = previousValue / currentValue;
   }
+
+  return roundNumber(currentValue);
 };
 
-const divideByZero = function () {
-  if (currentValue == 0 || previousValue == 0) {
-    displayCurrentValue.textContent = "ERROR";
-    return;
-  }
+const roundNumber = function (num) {
+  return Math.round(num * 1000) / 1000;
 };
