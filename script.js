@@ -63,6 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
     displayPreviousValue.textContent = "";
     displayCurrentValue.textContent = "";
   });
+
+  decimal.addEventListener("click", function () {
+    addDecimal();
+    displayCurrentValue.textContent = currentValue;
+  });
 });
 
 const handleNumber = function (num) {
@@ -87,4 +92,11 @@ const handleCalculation = function () {
 
 const roundNumber = function (num) {
   return Math.round(num * 1000) / 1000;
+};
+
+const addDecimal = function () {
+  if (!currentValue.includes(".")) {
+    currentValue += ".";
+    console.log(currentValue);
+  }
 };
