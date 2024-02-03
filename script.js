@@ -6,6 +6,7 @@ let currentValue = "";
 
 document.addEventListener("DOMContentLoaded", function () {
   const clear = document.querySelector(".all-clear");
+  const btnDelete = document.querySelector(".delete");
   const equal = document.querySelector(".btn-equal");
   const decimal = document.querySelector(".btn-decimal");
 
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   numbers.forEach((number) =>
     number.addEventListener("click", function (e) {
       handleNumber(e.target.textContent);
-      displayCurrentValue.textContent = currentValue;
+      updateDisplayedValues();
     })
   );
 
@@ -60,14 +61,23 @@ document.addEventListener("DOMContentLoaded", function () {
     operator = "";
     previousValue = "";
     currentValue = "";
-    displayPreviousValue.textContent = "";
-    displayCurrentValue.textContent = "";
+    updateDisplayedValues();
   });
 
   decimal.addEventListener("click", function () {
     addDecimal();
-    displayCurrentValue.textContent = currentValue;
+    updateDisplayedValues();
   });
+
+  btnDelete.addEventListener("click", function () {
+    currentValue = currentValue.toString().slice(0, -1);
+    updateDisplayedValues();
+  });
+
+  const updateDisplayedValues = function () {
+    displayCurrentValue.textContent = currentValue;
+    displayPreviousValue.textContent = previousValue;
+  };
 });
 
 const handleNumber = function (num) {
@@ -97,6 +107,5 @@ const roundNumber = function (num) {
 const addDecimal = function () {
   if (!currentValue.includes(".")) {
     currentValue += ".";
-    console.log(currentValue);
   }
 };

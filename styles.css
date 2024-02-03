@@ -121,6 +121,10 @@ body {
   background-color: orange;
 }
 
+.buttons :first-child {
+  width: 205px;
+}
+
 .buttons :last-child {
   background-color: red;
   color: white;
