@@ -75,8 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const updateDisplayedValues = function () {
+    if (operator === "") {
+      displayPreviousValue.textContent = previousValue;
+      displayCurrentValue.textContent = currentValue;
+    }
+    displayPreviousValue.textContent = `${previousValue} ${operator}`;
     displayCurrentValue.textContent = currentValue;
-    displayPreviousValue.textContent = previousValue;
   };
 });
 
